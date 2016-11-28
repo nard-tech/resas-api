@@ -1,38 +1,43 @@
+require 'nard/appi/client'
+
+require 'active_support'
+require 'active_support/core_ext'
 require 'uri'
-require 'net/http'
-require 'singleton'
 
+# RESAS (Regional Economy Society Analyzing System) に関する機能を格納する名前空間
+# @see {https://resas.go.jp/}
 module Resas
+
+  # RESAS API を扱うための Gem - トップの名前空間
+  # @see {https://opendata.resas-portal.go.jp/}
+  # @see {https://opendata.resas-portal.go.jp/docs/api/v1-rc.1/index.html}
   module Api
-    class Client
 
-      include Singleton
+    # RESAS API へアクセスするクライアントのクラス
+    # @note 実際の通信には Gem 'Faraday' を利用する。
+    class Client < Nard::Appi::Client
 
-      API_ENDPOINT = 'https://opendata.resas-portal.go.jp'
+      filenames = [
+        :connection,
+        :request,
+        :endpoint,
+      ]
 
-      def initialize
-        uri = ::URI.parse( API_ENDPOINT )
-
-        @http = Net::HTTP.new( uri.host, uri.port )
-        @http.use_ssl = ( uri.scheme == 'https' )
-
-        @header = { 'X-API-KEY' => ENV[ 'RESAS_API_ACCESS_KEY' ], 'Content-Type' => 'application/json' }
-        # @http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      filenames.each do | filename |
+        require File.expand_path( "../client_ext/#{ filename }", __FILE__ )
+        include Resas::Api::ClientExt.const_get( filename.capitalize )
       end
 
-      def get( *args )
-        api_version = Resas::Api.api_version
-        response = @http.get( Resas::Api::Client::Path.get( api_version, *args ), @header )
-        Resas::Api::Client::Response.new( response )
+      def initialize( options = {} )
+        super( Resas::Api, options )
       end
 
-      # @return [URI::HTTP]
-      def path( *args )
-        api_version = Resas::Api.api_version
-        URI.join( API_ENDPOINT, Resas::Api::Client::Path.get( api_version, *args ) )
+      # API のエンドポイント（APIのバージョンを含む）
+      # @return [URI::HTTPS]
+      def base_endpoint
+        URI.join( base_url, "/api/#{ api_version }" )
       end
 
     end
-
   end
 end
