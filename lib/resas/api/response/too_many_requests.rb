@@ -7,9 +7,11 @@ module Resas
   # @see {https://opendata.resas-portal.go.jp/docs/api/v1-rc.1/index.html}
   module Api
 
-    # この Gem のバージョン
-    # @return [String]
-    VERSION = '0.2.0'.freeze
+    module Response
 
+      class TooManyRequests < BaseError
+      end
+
+    end
   end
 end

@@ -1,23 +1,42 @@
-require 'resas/api/version'
-require 'resas/api/client'
-require 'resas/api/client/path'
-require 'resas/api/client/response'
-require 'resas/api/client/response/body'
-require 'resas/api/client/response/body/result'
+require 'nard/appi'
 
+require_relative 'api/version'
+require_relative 'api/api_ext/default_configuration'
+
+# RESAS (Regional Economy Society Analyzing System) に関する機能を格納する名前空間
+# @see {https://resas.go.jp/}
 module Resas
+
+  # RESAS API を扱うための Gem - トップの名前空間
+  # @see {https://opendata.resas-portal.go.jp/}
+  # @see {https://opendata.resas-portal.go.jp/docs/api/v1-rc.1/index.html}
   module Api
 
-    class << self
-      attr_accessor :api_version
+    include Nard::Appi::ApiExt::Version
+    include Nard::Appi::ApiExt::Client
+    include Nard::Appi::ApiExt::Configuration
+
+    include ApiExt::DefaultConfiguration
+
+    include Nard::Appi::ApiExt::Initializer
+
+    # クライアントのオブジェクトを返すメソッド
+    # @param options [Hash] オプション
+    # @return [Resas::Api::Client]
+    def self.client( options = {} )
+      super( Resas::Api, options )
     end
 
-    self.api_version = 'v1-rc.1'
+    def self.method_missing( method, *args, &block )
+      return super unless client.respond_to?( method )
+      client.send( method, *args, &block )
+    end
 
-    # @return [Resas::Api::Client]
-    def self.client
-      @client ||= Resas::Api::Client.instance
+    def self.respond_to?( method, include_all = false )
+      return client.respond_to?( method, include_all ) || super
     end
 
   end
 end
+
+require_relative 'api/client'
