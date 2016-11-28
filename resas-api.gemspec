@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors = [ 'Shu Fujita' ]
   spec.email = [ 's.fujita@nard.tech' ]
 
-  spec.summary = 'API for RESAS'
+  spec.summary = 'Ruby Gem for RESAS (Regional Economy Society Analyzing System) API by Japanese government.'
   spec.description = 'RESAS (Regional Economy Society Analyzing System) is developed by Japanese government. (https://resas.go.jp/) This gem enables you to access to API more easily.'
   spec.homepage = 'https://github.com/nard-tech/resas-api'
   spec.license = 'MIT'
