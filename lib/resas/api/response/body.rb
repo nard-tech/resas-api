@@ -83,7 +83,10 @@ module Resas
         private
 
         def raise_error_if_needed
-          raise error_class.new( @h ) unless result.present?
+          unless result.present?
+            e = error_class.new( self )
+            raise e
+          end
         end
 
         def error_class
