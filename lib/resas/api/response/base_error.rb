@@ -16,10 +16,14 @@ module Resas
         end
 
         def message
-          "#{ @body.message } (#{ path })"
+          "#{ __message__ } (#{ path })"
         end
 
         private
+
+        def __message__
+          @body.message.present? ? @body.message : "[#{ self.class.name }]"
+        end
 
         def path
           @body.path( full: true )
