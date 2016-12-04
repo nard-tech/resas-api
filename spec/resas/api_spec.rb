@@ -7,7 +7,7 @@ describe Resas::Api do
     it 'has constant \'VERSION\'.' do
       expect( Resas::Api::VERSION ).to be_present
       expect( Resas::Api::VERSION ).to be_instance_of( String )
-      expect( Resas::Api::VERSION ).to eq( '0.2.2' )
+      expect( Resas::Api::VERSION ).to eq( '0.2.3' )
       expect( Resas::Api::VERSION ).to be_frozen
     end
 
@@ -248,8 +248,8 @@ describe Resas::Api do
         expect( Resas::Api ).to respond_to( :options )
       end
 
-      it 'has module method \'.#reset\'' do
-        expect( Resas::Api ).to respond_to( :reset )
+      it 'has module method \'.#reset!\'' do
+        expect( Resas::Api ).to respond_to( :reset! )
       end
 
       describe '.#options' do
@@ -286,12 +286,12 @@ describe Resas::Api do
 
       end
 
-      describe '.#reset' do
+      describe '.#reset!' do
 
         it 'resets settings of Resas::Api and returns options of Resas::Api as an instance of Hash' do
-          expect( Resas::Api.reset ).to be_present
-          expect( Resas::Api.reset ).to be_instance_of( Hash )
-          expect( Resas::Api.reset.keys ).to eq( Resas::Api::OPTIONS_KEYS )
+          expect( Resas::Api.reset! ).to be_present
+          expect( Resas::Api.reset! ).to be_instance_of( Hash )
+          expect( Resas::Api.reset!.keys ).to eq( Resas::Api::OPTIONS_KEYS )
         end
 
       end
@@ -379,7 +379,7 @@ describe Resas::Api do
         end
 
         after do
-          Resas::Api.reset
+          Resas::Api.reset!
         end
 
       end

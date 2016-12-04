@@ -107,7 +107,7 @@ spec.add_runtime_dependency 'resas-api'
 ## require
 
 ```ruby
-require 'resas/api' # 注意: require 'resas-api' でない！
+require 'resas/api' # 注意: require 'resas-api' ではない！
 ```
 
 ## 使い方
@@ -147,7 +147,7 @@ Resas::Api.options
 
 ```ruby
 # 返り値はデフォルトの設定内容
-Resas::Api.reset
+Resas::Api.reset!
 => {
   :access_key=>"[ApiAccessKey]",
   :base_url=>"https://opendata.resas-portal.go.jp",
