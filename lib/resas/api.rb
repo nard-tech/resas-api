@@ -15,6 +15,7 @@ module Resas
     include Nard::Appi::ApiExt::Version
     include Nard::Appi::ApiExt::Client
     include Nard::Appi::ApiExt::Configuration
+    include Nard::Appi::ApiExt::Environment
 
     include ApiExt::DefaultConfiguration
 
@@ -40,3 +41,5 @@ module Resas
 end
 
 require_relative 'api/client'
+
+Resas::Api.env = :development
