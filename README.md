@@ -107,7 +107,7 @@ spec.add_runtime_dependency 'resas-api'
 ## require
 
 ```ruby
-require 'resas/api' # 注意: require 'resas-api' でない！
+require 'resas/api' # 注意: require 'resas-api' ではない！
 ```
 
 ## 使い方
