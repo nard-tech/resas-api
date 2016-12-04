@@ -72,7 +72,7 @@ module Resas
             #{ e.message }
               method_name: #{ method_name }, @h.class: #{ @h.class }
           MSG
-          # binding.pry
+          binding.pry if Resas::Api.env.development? || Resas::Api.env.test?
           raise e
         end
 
