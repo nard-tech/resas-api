@@ -85,6 +85,7 @@ module Resas
         def raise_error_if_needed
           unless result.present?
             e = error_class.new( self )
+            binding.pry if Resas::Api.env.development? || Resas::Api.env.test?
             raise e
           end
         end
