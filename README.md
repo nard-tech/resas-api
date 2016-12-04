@@ -147,7 +147,7 @@ Resas::Api.options
 
 ```ruby
 # 返り値はデフォルトの設定内容
-Resas::Api.reset
+Resas::Api.reset!
 => {
   :access_key=>"[ApiAccessKey]",
   :base_url=>"https://opendata.resas-portal.go.jp",
