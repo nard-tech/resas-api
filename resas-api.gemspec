@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'activesupport', '~> 5.0', '>= 5.0.0.1'
 
-  spec.add_runtime_dependency 'nard-appi', '>= 0.1.1'
+  spec.add_runtime_dependency 'nard-appi', '>= 0.1.3'
   spec.add_runtime_dependency 'faraday', '= 0.10'
   spec.add_runtime_dependency 'faraday_middleware', '= 0.10.1'
 
