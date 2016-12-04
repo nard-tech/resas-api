@@ -11,8 +11,22 @@ module Resas
 
       class BaseError < StandardError
 
-        def initialize(h)
-          @h = h
+        def initialize( body )
+          @body = body
+        end
+
+        def message
+          "#{ __message__ } (#{ path })"
+        end
+
+        private
+
+        def __message__
+          @body.message.present? ? @body.message : "[#{ self.class.name }]"
+        end
+
+        def path
+          @body.path( full: true )
         end
 
       end

@@ -1,3 +1,5 @@
+require_relative './base_error'
+
 # RESAS (Regional Economy Society Analyzing System) に関する機能を格納する名前空間
 # @see {https://resas.go.jp/}
 module Resas

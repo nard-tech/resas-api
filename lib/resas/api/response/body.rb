@@ -1,3 +1,8 @@
+require_relative './forbidden'
+require_relative './not_found'
+require_relative './too_many_requests'
+require_relative './base_error'
+
 # RESAS (Regional Economy Society Analyzing System) に関する機能を格納する名前空間
 # @see {https://resas.go.jp/}
 module Resas
@@ -78,7 +83,11 @@ module Resas
         private
 
         def raise_error_if_needed
-          raise error_class.new( @h ) unless result.present?
+          unless result.present?
+            e = error_class.new( self )
+            binding.pry if Resas::Api.env.development? || Resas::Api.env.test?
+            raise e
+          end
         end
 
         def error_class
