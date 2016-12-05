@@ -20,7 +20,7 @@ module Resas
       filenames = [
         :connection,
         :request,
-        :endpoint,
+        :endpoints,
       ]
 
       filenames.each do | filename |
