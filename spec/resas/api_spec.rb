@@ -7,7 +7,7 @@ describe Resas::Api do
     it 'has constant \'VERSION\'.' do
       expect( Resas::Api::VERSION ).to be_present
       expect( Resas::Api::VERSION ).to be_instance_of( String )
-      expect( Resas::Api::VERSION ).to eq( '0.2.3' )
+      expect( Resas::Api::VERSION ).to eq( '0.2.4' )
       expect( Resas::Api::VERSION ).to be_frozen
     end
 

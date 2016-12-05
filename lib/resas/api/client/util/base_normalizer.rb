@@ -27,6 +27,10 @@ module Resas
             [ value ].flatten.join( ',' )
           end
 
+          def active_value?( value )
+            value.present?
+          end
+
         end
 
       end

@@ -1,3 +1,5 @@
+require_relative './base_error'
+
 # RESAS (Regional Economy Society Analyzing System) に関する機能を格納する名前空間
 # @see {https://resas.go.jp/}
 module Resas
@@ -7,9 +9,11 @@ module Resas
   # @see {https://opendata.resas-portal.go.jp/docs/api/v1-rc.1/index.html}
   module Api
 
-    # この Gem のバージョン
-    # @return [String]
-    VERSION = '0.2.4'.freeze
+    module Response
 
+      class BadRequest < BaseError
+      end
+
+    end
   end
 end
