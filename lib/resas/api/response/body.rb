@@ -1,6 +1,9 @@
+require_relative './validation_error'
+require_relative './bad_request'
 require_relative './forbidden'
 require_relative './not_found'
 require_relative './too_many_requests'
+
 require_relative './base_error'
 
 # RESAS (Regional Economy Society Analyzing System) に関する機能を格納する名前空間
@@ -92,6 +95,13 @@ module Resas
 
         def error_class
           case status_code
+          when 400
+            case message
+            when 'Validation Failed.'
+              Resas::Api::Response::ValidationError
+            else
+              Resas::Api::Response::BadRequest
+            end
           when 403
             Resas::Api::Response::Forbidden
           when 404
