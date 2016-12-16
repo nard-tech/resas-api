@@ -17,20 +17,8 @@ module Resas
     # @note 実際の通信には Gem 'Faraday' を利用する。
     class Client < Nard::Appi::Client
 
-      filenames = [
-        :connection,
-        :request,
-        :endpoints,
-      ]
-
-      filenames.each do | filename |
-        require File.expand_path( "../client_ext/#{ filename }", __FILE__ )
-        include Resas::Api::ClientExt.const_get( filename.capitalize )
-      end
-
-      def initialize( options = {} )
-        super( Resas::Api, options )
-      end
+      client_for Resas::Api
+      concerns :Connection, :Request, :Endpoints, under: 'resas/api/client_ext'
 
       # API のエンドポイント（APIのバージョンを含む）
       # @return [URI::HTTPS]
