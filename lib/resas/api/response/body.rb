@@ -1,3 +1,5 @@
+require 'nard/appi/response/body'
+
 require_relative './validation_error'
 require_relative './bad_request'
 require_relative './forbidden'
@@ -17,23 +19,7 @@ module Resas
 
     module Response
 
-      class Body
-
-        def initialize( h, client, path, options )
-          @h = h
-
-          @client = client
-          @path = path
-          @options = options
-
-          raise_error_if_needed
-        end
-
-        # @return [URI::HTTPS or URI::Generic]
-        def path( full: true )
-          options = @options.dup.merge( full: full )
-          @client.path( @path, options )
-        end
+      class Body < Nard::Appi::Response::Body
 
         # @return [Array or nil]
         def result
@@ -66,23 +52,6 @@ module Resas
           description.present?
         end
 
-        def method_missing( method_name, *args, &block )
-          return super unless @h.respond_to?( method_name )
-          @h.send( method, *args, &block )
-        rescue NoMethodError => e
-          e.message = <<-MSG
-            Resas::Api::Response::Body#method_missing
-            #{ e.message }
-              method_name: #{ method_name }, @h.class: #{ @h.class }
-          MSG
-          binding.pry if Resas::Api.env.development? || Resas::Api.env.test?
-          raise e
-        end
-
-        def respond_to?( method, include_all = true )
-          return @h.respond_to?( method, include_all ) || super
-        end
-
         private
 
         def raise_error_if_needed
@@ -111,6 +80,16 @@ module Resas
           else
             Resas::Api::Response::BaseError
           end
+        end
+
+        def rescue_method_missing(e)
+          e.message = <<-MSG
+            Resas::Api::Response::Body#method_missing
+            #{ e.message }
+              method_name: #{ method_name }, @h.class: #{ @h.class }
+          MSG
+          binding.pry if Resas::Api.env.development? || Resas::Api.env.test?
+          raise e
         end
 
       end

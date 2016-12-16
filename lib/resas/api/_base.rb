@@ -12,20 +12,15 @@ module Resas
   # @see {https://opendata.resas-portal.go.jp/docs/api/v1-rc.1/index.html}
   module Api
 
-    include Nard::Appi::ApiExt::Version
-    include Nard::Appi::ApiExt::Client
-    include Nard::Appi::ApiExt::Configuration
-    include Nard::Appi::ApiExt::Environment
+    include Nard::Appi::Base
 
-    include ApiExt::DefaultConfiguration
-
-    include Nard::Appi::ApiExt::Initializer
+    default_config ApiExt::DefaultConfiguration
 
     # クライアントのオブジェクトを返すメソッド
     # @param options [Hash] オプション
     # @return [Resas::Api::Client]
     def self.client( options = {} )
-      super( Resas::Api, options )
+      super( options )
     end
 
     def self.method_missing( method, *args, &block )
