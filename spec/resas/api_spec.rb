@@ -119,7 +119,7 @@ describe Resas::Api do
       it 'returns default version of the API to access' do
         expect( Resas::Api::DEFAULT_API_VERSION ).to be_present
         expect( Resas::Api::DEFAULT_API_VERSION ).to be_instance_of( Symbol ).or( be_instance_of( String ) )
-        expect( Resas::Api::DEFAULT_API_VERSION ).to eq( 'v1-rc.1' )
+        expect( Resas::Api::DEFAULT_API_VERSION ).to eq( 'v1' )
         expect( Resas::Api::DEFAULT_API_VERSION ).to be_frozen
       end
 
@@ -222,7 +222,7 @@ describe Resas::Api do
           expect( Resas::Api.api_version ).to be_present
           expect( Resas::Api.api_version ).to be_instance_of( Symbol ).or( be_instance_of( String ) )
           expect( Resas::Api.api_version ).to eq( Resas::Api::DEFAULT_API_VERSION )
-          expect( Resas::Api.api_version ).to eq( 'v1-rc.1' )
+          expect( Resas::Api.api_version ).to eq( 'v1' )
           expect( Resas::Api.api_version ).to be_frozen
         end
 
