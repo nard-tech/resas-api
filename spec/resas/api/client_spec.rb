@@ -99,7 +99,7 @@ describe Resas::Api::Client do
           expect( @client.api_version ).to be_present
           expect( @client.api_version ).to be_instance_of( Symbol ).or( be_instance_of( String ) )
           expect( @client.api_version ).to eq( Resas::Api::DEFAULT_API_VERSION )
-          expect( @client.api_version ).to eq( 'v1-rc.1' )
+          expect( @client.api_version ).to eq( 'v1' )
           expect( @client.api_version ).to be_frozen
         end
 
@@ -122,7 +122,7 @@ describe Resas::Api::Client do
         it 'returns the base endpoint of the API as an instance of URI::HTTPS' do
           expect( @client.base_endpoint ).to be_present
           expect( @client.base_endpoint ).to be_instance_of( URI::HTTPS )
-          expect( @client.base_endpoint.to_s ).to eq( 'https://opendata.resas-portal.go.jp/api/v1-rc.1' )
+          expect( @client.base_endpoint.to_s ).to eq( 'https://opendata.resas-portal.go.jp/api/v1' )
         end
 
       end

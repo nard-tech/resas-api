@@ -32,13 +32,13 @@ The gem is available as open source under the terms of the [MIT License](http://
 ```ruby
 Resas::Api.configure do | config |
   config.access_key = '[ApiAccessKey]'
-  config.api_version = 'v1-rc.1'
+  config.api_version = 'v1'
 end
 => {
   :access_key=>"[ApiAccessKey]",
   :base_url=>"https://opendata.resas-portal.go.jp",
   :format=>:json,
-  :api_version=>"v1-rc.1",
+  :api_version=>"v1",
   :adapter=>:net_http
 }
 
@@ -47,7 +47,7 @@ Resas::Api.options
   :access_key=>"[ApiAccessKey]",
   :base_url=>"https://opendata.resas-portal.go.jp",
   :format=>:json,
-  :api_version=>"v1-rc.1",
+  :api_version=>"v1",
   :adapter=>:net_http
 }
 
@@ -56,7 +56,7 @@ response_body = Resas::Api.client.get( 'prefectures' )
   @client=#<Resas::Api::Client:0x007fa7194ad298
     @access_key="[ApiAccessKey]",
     @adapter=:net_http,
-    @api_version="v1-rc.1",
+    @api_version="v1",
     @base_url="https://opendata.resas-portal.go.jp",
     @format=:json
   >,
@@ -117,7 +117,7 @@ require 'resas/api' # 注意: require 'resas-api' ではない！
 ```ruby
 Resas::Api.configure do | config |
   config.access_key = '[ApiAccessKey]'
-  config.api_version = 'v1-rc.1'
+  config.api_version = 'v1'
 end
 ```
 
@@ -125,9 +125,10 @@ end
   * 省略した場合は、環境変数 RESAS_API_ACCESS_KEY の値を使用します。
   * 言い換えると、環境変数を設定すれば、Gem を使用する度にアクセスキーを登録する手間を省くことができます。
 * api_version: API のバージョン
-  * 省略した場合は、バージョン 'v1-rc.1' の API にアクセスします。
-  * 現時点 (2016-12-01 02:13+0900) では、公開されている API は v1-rc.1 のみです。したがって、この設定を行う必要はありません。
-  * 将来的に新しいバージョンが公開された場合に備え、設定メニューを作ってあります。
+  * 省略した場合は、バージョン`v1`の API にアクセスします。
+　　* `v1`以外のバージョンのAPIを利用する場合は指定が必須です。
+    * 補足: API公開時のバージョンは`v1-rc.1`でしたが、2016年12月末頃より`v1`が公開されました。現時点 (2017-01-18 05:55+0900) では`v1-rc.1`へアクセスが可能です。
+    * 注意: APIの利用規約が変更されたため、[RESAS-API - マイページ](https://opendata.resas-portal.go.jp/mypage.html) 内で新規約への同意をしないとAPIのアクセスができなくなるようです。
 * その他の設定メニューもありますが、利用する上で考慮する必要はありません。
 
 #### 設定内容を確認する
@@ -138,7 +139,7 @@ Resas::Api.options
   :access_key=>"[ApiAccessKey]",
   :base_url=>"https://opendata.resas-portal.go.jp",
   :format=>:json,
-  :api_version=>"v1-rc.1",
+  :api_version=>"v1",
   :adapter=>:net_http
 }
 ```
@@ -152,7 +153,7 @@ Resas::Api.reset!
   :access_key=>"[ApiAccessKey]",
   :base_url=>"https://opendata.resas-portal.go.jp",
   :format=>:json,
-  :api_version=>"v1-rc.1",
+  :api_version=>"v1",
   :adapter=>:net_http
 }
 
@@ -163,7 +164,7 @@ Resas::Api.reset!
 #### 例1 都道府県一覧を取得
 
 * 利用するAPI
-  * [都道府県一覧](https://opendata.resas-portal.go.jp/docs/api/v1-rc.1/prefectures.html)
+  * [都道府県一覧](https://opendata.resas-portal.go.jp/docs/api/v1/prefectures.html)
 
 ```ruby
 response_body = Resas::Api.client.get( 'prefectures' )
@@ -192,7 +193,7 @@ response_body
   @client=#<Resas::Api::Client:0x007fa7194ad298
     @access_key="[ApiAccessKey]",
     @adapter=:net_http,
-    @api_version="v1-rc.1",
+    @api_version="v1",
     @base_url="https://opendata.resas-portal.go.jp",
     @format=:json
   >,
@@ -264,7 +265,7 @@ response_body.result
 
 ```ruby
 response_body.path
-#=> #<URI::HTTPS https://opendata.resas-portal.go.jp/api/v1-rc.1/prefectures>
+#=> #<URI::HTTPS https://opendata.resas-portal.go.jp/api/v1/prefectures>
 
 response_body.path( full: false )
 => #<URI::Generic prefectures>
@@ -274,7 +275,7 @@ response_body.path( full: false )
 
 ```ruby
 Resas::Api.client.path( 'prefectures' )
-=> #<URI::HTTPS https://opendata.resas-portal.go.jp/api/v1-rc.1/prefectures>
+=> #<URI::HTTPS https://opendata.resas-portal.go.jp/api/v1/prefectures>
 
 Resas::Api.client.path( 'prefectures', full: false )
 => #<URI::Generic prefectures>
@@ -284,7 +285,7 @@ Resas::Api.client.path( 'prefectures', full: false )
 #### 例2 島根県の市町村一覧を取得する
 
 * 利用するAPI
-  * [市区町村一覧](https://opendata.resas-portal.go.jp/docs/api/v1-rc.1/cities.html)
+  * [市区町村一覧](https://opendata.resas-portal.go.jp/docs/api/v1/cities.html)
 
 例1からわかるように、島根県には都道府県コード`'32'`が割り当てられています。
 
@@ -325,7 +326,7 @@ response_body
   @client=#<Resas::Api::Client:0x007f8dfa8288d8
     @access_key="[ApiAccessKey]",
     @adapter=:net_http,
-    @api_version="v1-rc.1",
+    @api_version="v1",
     @base_url="https://opendata.resas-portal.go.jp",
     @format=:json
   >,
@@ -368,14 +369,14 @@ response_body.result
 #### 例3 島根県の「食料品製造業」について調べる
 
 * 利用するAPI
-  * [製造業事業所単位分析_継続・参入・退出事業所別の推移](https://opendata.resas-portal.go.jp/docs/api/v1-rc.1/industry/power/forManufacturerEstablishments.html)
-  * [産業中分類コード](https://opendata.resas-portal.go.jp/docs/api/v1-rc.1/industries/middle.html)
+  * [製造業事業所単位分析_継続・参入・退出事業所別の推移](https://opendata.resas-portal.go.jp/docs/api/v1/industry/power/forManufacturerEstablishments.html)
+  * [産業中分類コード](https://opendata.resas-portal.go.jp/docs/api/v1/industries/middle.html)
 
-API [製造業事業所単位分析_継続・参入・退出事業所別の推移](https://opendata.resas-portal.go.jp/docs/api/v1-rc.1/industry/power/forManufacturerEstablishments.html)を利用します。
+API [製造業事業所単位分析_継続・参入・退出事業所別の推移](https://opendata.resas-portal.go.jp/docs/api/v1/industry/power/forManufacturerEstablishments.html)を利用します。
 
 ##### Step1 産業中分類コードを取得
 
-その前に、[製造業事業所単位分析_継続・参入・退出事業所別の推移](https://opendata.resas-portal.go.jp/docs/api/v1-rc.1/industry/power/forManufacturerEstablishments.html)で利用する[産業中分類コード](https://opendata.resas-portal.go.jp/docs/api/v1-rc.1/industries/middle.html)を取得しましょう。
+その前に、[製造業事業所単位分析_継続・参入・退出事業所別の推移](https://opendata.resas-portal.go.jp/docs/api/v1/industry/power/forManufacturerEstablishments.html)で利用する[産業中分類コード](https://opendata.resas-portal.go.jp/docs/api/v1/industries/middle.html)を取得しましょう。
 
 ```ruby
 response_body = Resas::Api.client.get( 'industries/middle' )
@@ -407,7 +408,7 @@ response_body
   @client= #<Resas::Api::Client:0x007ffb23b45c78
     @access_key="[ApiAccessKey]",
     @adapter=:net_http,
-    @api_version="v1-rc.1",
+    @api_version="v1",
     @base_url="https://opendata.resas-portal.go.jp",
     @format=:json
   >,
@@ -474,7 +475,7 @@ response_body
   @client=#<Resas::Api::Client:0x007fbce4855b08
     @access_key="[ApiAccessKey]",
     @adapter=:net_http,
-    @api_version="v1-rc.1",
+    @api_version="v1",
     @base_url="https://opendata.resas-portal.go.jp",
     @format=:json
   >,

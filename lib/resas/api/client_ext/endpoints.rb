@@ -1,16 +1,16 @@
 # RESAS (Regional Economy Society Analyzing System) に関する機能を格納する名前空間
 # @see {https://resas.go.jp/}
+# @see {https://opendata.resas-portal.go.jp/}
+# @see {https://opendata.resas-portal.go.jp/docs/api/v1/index.html}
 module Resas
 
   # RESAS API を扱うための Gem - トップの名前空間
-  # @see {https://opendata.resas-portal.go.jp/}
-  # @see {https://opendata.resas-portal.go.jp/docs/api/v1-rc.1/index.html}
   module Api
 
     module ClientExt
 
       # 各 API のエンドポイントに直接アクセスするためのメソッドを格納するモジュール
-      # @see API概要 > 一覧 (https://opendata.resas-portal.go.jp/docs/api/v1-rc.1/index.html)
+      # @see API概要 > 一覧 (https://opendata.resas-portal.go.jp/docs/api/v1/index.html)
       module Endpoints
 
         # @!group 共通 > 都道府県、市区町村

@@ -17,15 +17,15 @@ describe Resas::Api::Client do
       it 'returns path for the API' do
         expect( @client.path( 'cities' ) ).to be_present
         expect( @client.path( 'cities' ) ).to be_instance_of( URI::HTTPS )
-        expect( @client.path( 'cities' ).to_s ).to eq( 'https://opendata.resas-portal.go.jp/api/v1-rc.1/cities' )
+        expect( @client.path( 'cities' ).to_s ).to eq( 'https://opendata.resas-portal.go.jp/api/v1/cities' )
 
         expect( @client.path( 'cities', pref_code: 1 ) ).to be_present
         expect( @client.path( 'cities', pref_code: 1 ) ).to be_instance_of( URI::HTTPS )
-        expect( @client.path( 'cities', pref_code: 1 ).to_s ).to eq( 'https://opendata.resas-portal.go.jp/api/v1-rc.1/cities?prefCode=1' )
+        expect( @client.path( 'cities', pref_code: 1 ).to_s ).to eq( 'https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=1' )
 
         expect( @client.path( 'cities', pref_code: 1, full: true ) ).to be_present
         expect( @client.path( 'cities', pref_code: 1, full: true ) ).to be_instance_of( URI::HTTPS )
-        expect( @client.path( 'cities', pref_code: 1, full: true ).to_s ).to eq( 'https://opendata.resas-portal.go.jp/api/v1-rc.1/cities?prefCode=1' )
+        expect( @client.path( 'cities', pref_code: 1, full: true ).to_s ).to eq( 'https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=1' )
 
         expect( @client.path( 'cities', pref_code: 1, full: false ) ).to be_present
         expect( @client.path( 'cities', pref_code: 1, full: false ) ).to be_instance_of( URI::Generic )
