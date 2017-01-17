@@ -301,7 +301,7 @@ describe Resas::Api do
         before do
           Resas::Api.configure do | config |
             config.access_key = 'TestAccessKey'
-            config.base_url = 'https://api.resas-portal.go.jp'
+            config.base_url = 'https://test.resas-portal.go.jp'
             config.format = 'xml'
             config.api_version = 'v1-rc.2'
             config.adapter = :test_adapter
@@ -318,7 +318,7 @@ describe Resas::Api do
               expect( Resas::Api.options.keys ).to eq( Resas::Api::OPTIONS_KEYS )
               expect( Resas::Api.options ).to eq({
                 access_key: 'TestAccessKey',
-                base_url: 'https://api.resas-portal.go.jp',
+                base_url: 'https://test.resas-portal.go.jp',
                 format: 'xml',
                 api_version: 'v1-rc.2',
                 adapter: :test_adapter,
@@ -341,7 +341,7 @@ describe Resas::Api do
             describe '.#base_url' do
 
               it 'returns the base url for the API after changing configurations' do
-                expect( Resas::Api.base_url ).to eq( 'https://api.resas-portal.go.jp' )
+                expect( Resas::Api.base_url ).to eq( 'https://test.resas-portal.go.jp' )
                 expect( Resas::Api.base_url ).not_to be_frozen
               end
 
