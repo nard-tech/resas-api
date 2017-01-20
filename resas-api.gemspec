@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = [ 'lib' ]
 
-  spec.add_runtime_dependency 'activesupport', '~> 5.0', '>= 5.0.0.1'
+  spec.add_runtime_dependency 'activesupport', '>= 4.2.7.1'
 
   spec.add_runtime_dependency 'nard-appi', '>= 0.2.0'
   spec.add_runtime_dependency 'faraday', '= 0.10'
