@@ -9,7 +9,7 @@ module Resas
 
     # この Gem のバージョン
     # @return [String]
-    VERSION = '0.3.2'.freeze
+    VERSION = '0.3.3'.freeze
 
   end
 end
