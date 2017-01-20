@@ -23,23 +23,23 @@ module Resas
 
         # @return [Array or nil]
         def result
-          @h[ 'result' ]
+          @obj[ 'result' ]
         end
 
         # @return [String or nil]
         def message
-          @h[ 'message' ]
+          @obj[ 'message' ]
         end
 
         # @return [Integer or nil]
         def status_code
-          _status_code = @h[ 'statusCode' ]
+          _status_code = @obj[ 'statusCode' ]
           _status_code.present? ? _status_code.to_i : nil
         end
 
         # @return [String or nil]
         def description
-          @h[ 'description' ]
+          @obj[ 'description' ]
         end
 
         # @return [Boolean]
@@ -86,7 +86,7 @@ module Resas
           e.message = <<-MSG
             Resas::Api::Response::Body#method_missing
             #{ e.message }
-              method_name: #{ method_name }, @h.class: #{ @h.class }
+              method_name: #{ method_name }, @obj.class: #{ @obj.class }
           MSG
           binding.pry if Resas::Api.env.development? || Resas::Api.env.test?
           raise e
